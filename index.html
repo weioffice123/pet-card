@@ -10,7 +10,7 @@
             background-color: #f7f9fa;
             color: #333;
             margin: 0;
-            padding: 20px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -25,15 +25,29 @@
             box-sizing: border-box;
             text-align: center;
         }
+        /* 調整這裡：將照片高度從 250px 改小為 180px，讓它不會佔太大空間 */
         img.pet-photo {
             width: 100%;
-            height: 250px;
+            height: 180px;
             object-fit: cover;
             border-radius: 12px;
         }
-        h1 { margin: 15px 0 5px; color: #e74c3c; }
-        .info { text-align: left; margin: 15px 0; background: #fdf2f2; padding: 12px; border-radius: 8px; }
-        .info p { margin: 6px 0; font-size: 15px; }
+        /* 調整這裡：放大標題文字讓重點更突出 */
+        h1 { margin: 15px 0 5px; color: #e74c3c; font-size: 24px; }
+        p { font-size: 16px; } /* 調整一般文字大小 */
+        
+        .info { 
+            text-align: left; 
+            margin: 15px 0; 
+            background: #fdf2f2; 
+            padding: 15px; 
+            border-radius: 8px; 
+        }
+        /* 調整這裡：放大寵物資訊欄位的文字，讓好心人更容易看清楚 */
+        .info p { 
+            margin: 8px 0; 
+            font-size: 17px; 
+        }
         .btn {
             background-color: #06C755; /* LINE 綠色 */
             color: white;
@@ -56,14 +70,14 @@
 <body>
 
 <div class="card">
-    <!-- 記得把下方網址換成你家寵物的真實照片公開網址 -->
-    <img src="https://scontent-tpe1-1.xx.fbcdn.net/v/t39.30808-6/671200856_26944198601838974_3599286336485569020_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=KhiahJVawLAQ7kNvwFgEYBL&_nc_oc=AdoDZLUTKUhQVSMfsuiaDca7hT3R2-p-jhuQi7mq-i1oyHv-Eap1zHagdcD1oNx3pdM&_nc_zt=23&_nc_ht=scontent-tpe1-1.xx&_nc_gid=cRqdln1NRdhuXUvjsk4hmg&_nc_ss=7b2a8&oh=00_AQQApQvIiD8o-GuII--9XWGgUMwhsH4t8y6SDWXNB8vahA&oe=6AF47735">
+    <!-- 旺仔的照片 -->
+    <img src="https://scontent-tpe1-1.xx.fbcdn.net/v/t39.30808-6/671200856_26944198601838974_3599286336485569020_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=KhiahJVawLAQ7kNvwFgEYBL&_nc_oc=AdoDZLUTKUhQVSMfsuiaDca7hT3R2-p-jhuQi7mq-i1oyHv-Eap1zHagdcD1oNx3pdM&_nc_zt=23&_nc_ht=scontent-tpe1-1.xx&_nc_gid=cRqdln1NRdhuXUvjsk4hmg&_nc_ss=7b2a8&oh=00_AQQApQvIiD8o-GuII--9XWGgUMwhsH4t8y6SDWXNB8vahA&oe=6AF47735" alt="旺仔的照片" class="pet-photo">
     
     <h1>🚨 我主人迷路了！</h1>
     <p>如果您看到我，請幫忙點擊下方按鈕回報位置，謝謝您！</p>
 
     <div class="info">
-        <p><strong>名字：</strong> 旺仔(邊境牧羊犬)</p>
+        <p><strong>名字：</strong> 旺仔 (邊境牧羊犬)</p>
         <p><strong>特徵：</strong> 親人、藍色項圈 黃色燈</p>
         <p><strong>聯絡電話：</strong> 0937530178</p>
     </div>
