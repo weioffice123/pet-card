@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>協尋寵物：阿財</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f7f9fa;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        img.pet-photo {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        h1 { margin: 15px 0 5px; color: #e74c3c; }
+        .info { text-align: left; margin: 15px 0; background: #fdf2f2; padding: 12px; border-radius: 8px; }
+        .info p { margin: 6px 0; font-size: 15px; }
+        .btn {
+            background-color: #06C755; /* LINE 綠色 */
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            text-decoration: none;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+        .btn:active { background-color: #05b34c; }
+        #status { margin-top: 10px; font-size: 14px; color: #666; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <!-- 記得把下方網址換成你家寵物的真實照片公開網址 -->
+    <img src="https://scontent-tpe1-1.xx.fbcdn.net/v/t39.30808-6/671200856_26944198601838974_3599286336485569020_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=KhiahJVawLAQ7kNvwFgEYBL&_nc_oc=AdoDZLUTKUhQVSMfsuiaDca7hT3R2-p-jhuQi7mq-i1oyHv-Eap1zHagdcD1oNx3pdM&_nc_zt=23&_nc_ht=scontent-tpe1-1.xx&_nc_gid=cRqdln1NRdhuXUvjsk4hmg&_nc_ss=7b2a8&oh=00_AQQApQvIiD8o-GuII--9XWGgUMwhsH4t8y6SDWXNB8vahA&oe=6AF47735">
+    
+    <h1>🚨 我主人迷路了！</h1>
+    <p>如果您看到我，請幫忙點擊下方按鈕回報位置，謝謝您！</p>
+
+    <div class="info">
+        <p><strong>名字：</strong> 旺仔(邊境牧羊犬)</p>
+        <p><strong>特徵：</strong> 親人、藍色項圈 黃色燈</p>
+        <p><strong>聯絡電話：</strong> 0937530178</p>
+    </div>
+
+    <!-- 點擊後抓取定位並呼叫 LINE -->
+    <button class="btn" onclick="sendToLine()">📍 傳送我的位置給主人 LINE</button>
+    <div id="status"></div>
+</div>
+
+<script>
+    function sendToLine() {
+        const statusDiv = document.getElementById('status');
+        
+        if (!navigator.geolocation) {
+            statusDiv.innerHTML = "抱歉，您的手機瀏覽器不支援定位功能。";
+            return;
+        }
+
+        statusDiv.innerHTML = "正在取得您的目前位置，請稍候...";
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                
+                // 產生 Google Maps 導航連結
+                const mapsUrl = `https://www.google.com/maps?q=${lat},${lon}`;
+                const message = `🚨 您的寵物在這裡被發現了！\n📍 好心人位置：\n${mapsUrl}`;
+
+                statusDiv.innerHTML = "即將開啟 LINE 傳送位置...";
+
+                // 使用 LINE 官方文字分享協定
+                const lineShareUrl = `https://line.me/R/msg/text/?${encodeURIComponent(message)}`;
+                
+                setTimeout(() => {
+                    window.location.href = lineShareUrl;
+                }, 1000);
+            },
+            (error) => {
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        statusDiv.innerHTML = "❌ 您取消了定位權限。請允許定位才能通知主人喔！";
+                        break;
+                    default:
+                        statusDiv.innerHTML = "❌ 無法取得位置，請確認手機 GPS 是否開啟，或直接撥打電話。";
+                        break;
+                }
+            },
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+        );
+    }
+</script>
+
+</body>
+</html>
